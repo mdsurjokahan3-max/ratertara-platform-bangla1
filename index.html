@@ -148,7 +148,6 @@
             margin-top: 18px;
             padding: 15px;
             border-radius: 12px;
-            word-break: break-all;
         }
 
         .success {
@@ -161,15 +160,6 @@
             background: #fff0f0;
             border: 1px solid #ffaaaa;
             color: #a40000;
-        }
-
-        .url-box {
-            margin-top: 10px;
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #333;
         }
 
         .copy-btn,
@@ -186,16 +176,45 @@
             text-decoration: none;
             font-family: inherit;
             cursor: pointer;
+            font-size: 15px;
         }
 
-        .note {
-            margin-top: 16px;
-            padding: 12px;
-            background: #f7f7f7;
-            border-radius: 10px;
+        .open-btn {
+            background: #008b8b;
+        }
+
+        /* =====================================
+           RULES & POLICY
+        ===================================== */
+
+        .rules {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8ffff;
+            border: 1px solid #dceeee;
+            border-radius: 14px;
+        }
+
+        .rules-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #006666;
+            margin-bottom: 10px;
+        }
+
+        .rules ul {
+            padding-left: 20px;
+        }
+
+        .rules li {
+            margin-bottom: 8px;
             font-size: 13px;
             line-height: 1.7;
-            color: #666;
+            color: #555;
+        }
+
+        .rules li:last-child {
+            margin-bottom: 0;
         }
 
         .footer {
@@ -231,10 +250,16 @@
             >
 
             <div class="preview" id="previewBox">
-                <img id="imagePreview" alt="Image Preview">
+                <img
+                    id="imagePreview"
+                    alt="Image Preview"
+                >
             </div>
 
-            <div class="file-info" id="fileInfo"></div>
+            <div
+                class="file-info"
+                id="fileInfo"
+            ></div>
 
             <button
                 class="upload-btn"
@@ -244,7 +269,10 @@
                 ছবি Upload করুন
             </button>
 
-            <div class="progress-box" id="progressBox">
+            <div
+                class="progress-box"
+                id="progressBox"
+            >
 
                 <div class="progress-text">
                     <span>Uploading...</span>
@@ -260,16 +288,19 @@
 
             </div>
 
+
+            <!-- SUCCESS -->
+
             <div
                 class="result success"
                 id="successBox"
             >
-                <strong>✓ ছবি সফলভাবে Upload হয়েছে</strong>
 
-                <div
-                    class="url-box"
-                    id="imageUrl"
-                ></div>
+                <strong>
+                    ✓ ছবি সফলভাবে Upload হয়েছে
+                </strong>
+
+                <!-- URL এখানে আর দেখানো হবে না -->
 
                 <button
                     class="copy-btn"
@@ -287,15 +318,70 @@
                 >
                     ছবি দেখুন
                 </a>
+
             </div>
+
+
+            <!-- ERROR -->
 
             <div
                 class="result error"
                 id="errorBox"
             ></div>
 
-            <div class="note">
-                
+
+            <!-- RULES -->
+
+            <div class="rules">
+
+                <div class="rules-title">
+                    📋 নিয়ম ও নীতিমালা
+                </div>
+
+                <ul>
+
+                    <li>
+                        শুধুমাত্র বৈধ এবং নিজের ব্যবহারের
+                        ছবি Upload করুন।
+                    </li>
+
+                    <li>
+                        অন্য ব্যক্তির অনুমতি ছাড়া
+                        ব্যক্তিগত ছবি Upload করবেন না।
+                    </li>
+
+                    <li>
+                        অশ্লীল, অবৈধ, সহিংস বা
+                        আইনবিরোধী কোনো ছবি Upload করা যাবে না।
+                    </li>
+
+                    <li>
+                        কপিরাইটযুক্ত ছবি ব্যবহারের ক্ষেত্রে
+                        প্রয়োজনীয় অনুমতি থাকা আবশ্যক।
+                    </li>
+
+                    <li>
+                        অন্যের পরিচয় ব্যবহার করে
+                        বিভ্রান্তিকর ছবি Upload করা নিষিদ্ধ।
+                    </li>
+
+                    <li>
+                        Upload করা ছবির দায়ভার
+                        সম্পূর্ণভাবে Uploadকারী ব্যক্তির।
+                    </li>
+
+                    <li>
+                        নিয়ম ভঙ্গকারী ছবি কর্তৃপক্ষের
+                        অনুমোদন ছাড়াই সরিয়ে দেওয়া হতে পারে।
+                    </li>
+
+                    <li>
+                        প্রয়োজন অনুযায়ী কর্তৃপক্ষ Upload করা
+                        ছবি পর্যালোচনা বা মুছে দিতে পারে।
+                    </li>
+
+                </ul>
+
             </div>
 
         </div>
@@ -303,7 +389,7 @@
     </main>
 
     <footer class="footer">
-        
+
     </footer>
 
 </div>
@@ -319,13 +405,14 @@ const CLOUDINARY_CLOUD_NAME = "rawaad4u";
 
 /*
    Cloudinary Dashboard-এ তৈরি করা
-   Unsigned Image Upload Preset-এর নাম দিন
+   Unsigned Image Upload Preset
 */
-const CLOUDINARY_UPLOAD_PRESET = "rater_tara_image";
+const CLOUDINARY_UPLOAD_PRESET =
+    "rater_tara_image";
 
 
 /*
-   IMAGE upload URL
+   IMAGE UPLOAD URL
 */
 const CLOUDINARY_UPLOAD_URL =
     "https://api.cloudinary.com/v1_1/" +
@@ -367,9 +454,6 @@ const successBox =
 const errorBox =
     document.getElementById("errorBox");
 
-const imageUrl =
-    document.getElementById("imageUrl");
-
 const openImage =
     document.getElementById("openImage");
 
@@ -382,90 +466,115 @@ let uploadedUrl = "";
    IMAGE SELECT
 ========================================= */
 
-imageFile.addEventListener("change", function () {
+imageFile.addEventListener(
+    "change",
+    function () {
 
-    selectedFile = this.files[0];
+        selectedFile = this.files[0];
 
-    successBox.style.display = "none";
-    errorBox.style.display = "none";
+        successBox.style.display = "none";
+        errorBox.style.display = "none";
 
-    if (!selectedFile) {
 
-        uploadBtn.disabled = true;
-        previewBox.style.display = "none";
-        fileInfo.style.display = "none";
+        if (!selectedFile) {
 
-        return;
+            uploadBtn.disabled = true;
+
+            previewBox.style.display =
+                "none";
+
+            fileInfo.style.display =
+                "none";
+
+            return;
+        }
+
+
+        /* IMAGE CHECK */
+
+        if (
+            !selectedFile.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            showError(
+                "অনুগ্রহ করে একটি ছবি নির্বাচন করুন।"
+            );
+
+            this.value = "";
+
+            uploadBtn.disabled = true;
+
+            return;
+        }
+
+
+        /* FILE SIZE */
+
+        const sizeMB =
+            selectedFile.size /
+            (1024 * 1024);
+
+
+        /* PREVIEW */
+
+        const objectURL =
+            URL.createObjectURL(
+                selectedFile
+            );
+
+        imagePreview.src =
+            objectURL;
+
+        previewBox.style.display =
+            "block";
+
+
+        /* FILE INFORMATION */
+
+        fileInfo.innerHTML =
+            "<b>ফাইল:</b> " +
+            escapeHtml(
+                selectedFile.name
+            ) +
+            "<br>" +
+            "<b>Size:</b> " +
+            sizeMB.toFixed(2) +
+            " MB";
+
+        fileInfo.style.display =
+            "block";
+
+
+        uploadBtn.disabled =
+            false;
+
     }
-
-
-    /* Image check */
-
-    if (!selectedFile.type.startsWith("image/")) {
-
-        showError(
-            "অনুগ্রহ করে একটি ছবি নির্বাচন করুন।"
-        );
-
-        this.value = "";
-        uploadBtn.disabled = true;
-
-        return;
-    }
-
-
-    /* File size */
-
-    const sizeMB =
-        selectedFile.size / (1024 * 1024);
-
-
-    /* Preview */
-
-    const objectURL =
-        URL.createObjectURL(selectedFile);
-
-    imagePreview.src = objectURL;
-
-    previewBox.style.display = "block";
-
-
-    /* File information */
-
-    fileInfo.innerHTML =
-        "<b>ফাইল:</b> " +
-        escapeHtml(selectedFile.name) +
-        "<br>" +
-        "<b>Size:</b> " +
-        sizeMB.toFixed(2) +
-        " MB";
-
-    fileInfo.style.display = "block";
-
-
-    uploadBtn.disabled = false;
-
-});
+);
 
 
 /* =========================================
    UPLOAD BUTTON
 ========================================= */
 
-uploadBtn.addEventListener("click", function () {
+uploadBtn.addEventListener(
+    "click",
+    function () {
 
-    if (!selectedFile) {
+        if (!selectedFile) {
 
-        showError(
-            "প্রথমে একটি ছবি নির্বাচন করুন।"
-        );
+            showError(
+                "প্রথমে একটি ছবি নির্বাচন করুন।"
+            );
 
-        return;
+            return;
+        }
+
+        uploadToCloudinary();
+
     }
-
-    uploadToCloudinary();
-
-});
+);
 
 
 /* =========================================
@@ -476,21 +585,31 @@ function uploadToCloudinary() {
 
     uploadBtn.disabled = true;
 
-    successBox.style.display = "none";
-    errorBox.style.display = "none";
+    successBox.style.display =
+        "none";
 
-    progressBox.style.display = "block";
+    errorBox.style.display =
+        "none";
 
-    progressBar.style.width = "0%";
-    progressText.textContent = "0%";
+    progressBox.style.display =
+        "block";
+
+    progressBar.style.width =
+        "0%";
+
+    progressText.textContent =
+        "0%";
 
 
-    const formData = new FormData();
+    const formData =
+        new FormData();
+
 
     formData.append(
         "file",
         selectedFile
     );
+
 
     formData.append(
         "upload_preset",
@@ -498,7 +617,8 @@ function uploadToCloudinary() {
     );
 
 
-    const xhr = new XMLHttpRequest();
+    const xhr =
+        new XMLHttpRequest();
 
 
     xhr.open(
@@ -516,11 +636,16 @@ function uploadToCloudinary() {
         "progress",
         function (event) {
 
-            if (event.lengthComputable) {
+            if (
+                event.lengthComputable
+            ) {
 
                 const percent =
                     Math.round(
-                        (event.loaded / event.total) * 100
+                        (
+                            event.loaded /
+                            event.total
+                        ) * 100
                     );
 
                 progressBar.style.width =
@@ -528,6 +653,7 @@ function uploadToCloudinary() {
 
                 progressText.textContent =
                     percent + "%";
+
             }
 
         }
@@ -538,117 +664,145 @@ function uploadToCloudinary() {
        RESPONSE
     ===================================== */
 
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange =
+        function () {
 
-        if (xhr.readyState !== 4) {
-            return;
-        }
-
-        uploadBtn.disabled = false;
-
-
-        let data;
-
-        try {
-
-            data =
-                JSON.parse(xhr.responseText);
-
-        } catch (error) {
-
-            showError(
-                "Cloudinary থেকে সঠিক response পাওয়া যায়নি।"
-            );
-
-            return;
-        }
+            if (
+                xhr.readyState !== 4
+            ) {
+                return;
+            }
 
 
-        /* SUCCESS */
-
-        if (
-            xhr.status >= 200 &&
-            xhr.status < 300
-        ) {
-
-            uploadedUrl =
-                data.secure_url || "";
+            uploadBtn.disabled =
+                false;
 
 
-            if (!uploadedUrl) {
+            let data;
+
+
+            try {
+
+                data =
+                    JSON.parse(
+                        xhr.responseText
+                    );
+
+            } catch (error) {
 
                 showError(
-                    "Upload হয়েছে, কিন্তু Image URL পাওয়া যায়নি।"
+                    "Cloudinary থেকে সঠিক response পাওয়া যায়নি।"
                 );
 
                 return;
             }
 
 
-            progressBar.style.width =
-                "100%";
+            /* SUCCESS */
 
-            progressText.textContent =
-                "100%";
+            if (
+                xhr.status >= 200 &&
+                xhr.status < 300
+            ) {
 
-
-            imageUrl.textContent =
-                uploadedUrl;
-
-            openImage.href =
-                uploadedUrl;
-
-            successBox.style.display =
-                "block";
+                uploadedUrl =
+                    data.secure_url ||
+                    "";
 
 
-            console.log(
-                "Cloudinary Image URL:",
-                uploadedUrl
+                if (!uploadedUrl) {
+
+                    showError(
+                        "Upload হয়েছে, কিন্তু Image URL পাওয়া যায়নি।"
+                    );
+
+                    return;
+                }
+
+
+                progressBar.style.width =
+                    "100%";
+
+                progressText.textContent =
+                    "100%";
+
+
+                /*
+                   URL screen-এ দেখানো হবে না।
+                   শুধু JavaScript variable-এ থাকবে।
+                */
+
+
+                openImage.href =
+                    uploadedUrl;
+
+
+                successBox.style.display =
+                    "block";
+
+
+                console.log(
+                    "Cloudinary Image URL:",
+                    uploadedUrl
+                );
+
+
+            } else {
+
+                const message =
+                    data?.error?.message ||
+                    "Cloudinary image upload failed.";
+
+                showError(
+                    message
+                );
+
+            }
+
+        };
+
+
+    /* =====================================
+       NETWORK ERROR
+    ===================================== */
+
+    xhr.onerror =
+        function () {
+
+            uploadBtn.disabled =
+                false;
+
+            showError(
+                "Internet connection অথবা Cloudinary connection সমস্যা হয়েছে।"
             );
 
-
-        } else {
-
-            const message =
-                data?.error?.message ||
-                "Cloudinary image upload failed.";
-
-            showError(message);
-        }
-
-    };
+        };
 
 
-    /* NETWORK ERROR */
+    /* =====================================
+       TIMEOUT
+    ===================================== */
 
-    xhr.onerror = function () {
+    xhr.ontimeout =
+        function () {
 
-        uploadBtn.disabled = false;
+            uploadBtn.disabled =
+                false;
 
-        showError(
-            "Internet connection অথবা Cloudinary connection সমস্যা হয়েছে।"
-        );
+            showError(
+                "Upload timeout হয়েছে। আবার চেষ্টা করুন।"
+            );
 
-    };
-
-
-    xhr.ontimeout = function () {
-
-        uploadBtn.disabled = false;
-
-        showError(
-            "Upload timeout হয়েছে। আবার চেষ্টা করুন।"
-        );
-
-    };
+        };
 
 
     xhr.timeout =
         10 * 60 * 1000;
 
 
-    xhr.send(formData);
+    xhr.send(
+        formData
+    );
 
 }
 
@@ -660,8 +814,14 @@ function uploadToCloudinary() {
 async function copyUrl() {
 
     if (!uploadedUrl) {
+
+        alert(
+            "কপি করার জন্য কোনো Image URL নেই।"
+        );
+
         return;
     }
+
 
     try {
 
@@ -675,8 +835,42 @@ async function copyUrl() {
 
     } catch (error) {
 
+        /*
+           Clipboard API কাজ না করলে
+           fallback copy
+        */
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+        textarea.value =
+            uploadedUrl;
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.opacity =
+            "0";
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.focus();
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        textarea.remove();
+
+
         alert(
-            "URL Copy করা যায়নি।"
+            "Image URL Copy হয়েছে।"
         );
 
     }
@@ -706,11 +900,31 @@ function showError(message) {
 function escapeHtml(text) {
 
     return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
