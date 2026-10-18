@@ -1,933 +1,871 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Rater Tara Image Upload</title>
+  <title>Casino</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 
-        body {
-            font-family: "Hind Siliguri", sans-serif;
-            background: #f3f7f8;
-            min-height: 100vh;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .app {
-            width: 100%;
-            max-width: 450px;
-            min-height: 100vh;
-            margin: auto;
-            background: #fff;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .header {
-            background: linear-gradient(135deg, #008b8b, #006666);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+    body {
+      background: #f2f4f7;
+      font-family: "Hind Siliguri", sans-serif;
+      color: #222;
+    }
 
-        .header h1 {
-            font-size: 23px;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .header p {
-            font-size: 14px;
-            opacity: .9;
-        }
+    button,
+    input {
+      font-family: inherit;
+    }
 
-        .content {
-            padding: 20px;
-        }
+    .app {
+      width: 100%;
+      max-width: 520px;
+      min-height: 100vh;
+      margin: auto;
+      background: #fff;
+      position: relative;
+      overflow-x: hidden;
+      box-shadow: 0 0 25px rgba(0,0,0,.08);
+    }
 
-        .card {
-            padding: 18px;
-            border-radius: 18px;
-            border: 1px solid #eee;
-            box-shadow: 0 8px 30px rgba(0,0,0,.08);
-        }
+    /* ================= HEADER ================= */
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+    .header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 17px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
 
-        input[type="file"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px dashed #008b8b;
-            border-radius: 12px;
-            background: #f8ffff;
-            font-family: inherit;
-        }
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #004444;
+    }
 
-        .preview {
-            display: none;
-            margin-top: 15px;
-            text-align: center;
-        }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
 
-        .preview img {
-            width: 100%;
-            max-height: 350px;
-            object-fit: contain;
-            border-radius: 14px;
-            background: #f1f1f1;
-        }
+    .header-btn {
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+      border: 0;
+      background: #f5f6f7;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      cursor: pointer;
+    }
 
-        .file-info {
-            display: none;
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 10px;
-            background: #f3f7f7;
-            font-size: 14px;
-        }
+    .header-btn:active {
+      transform: scale(.94);
+    }
 
-        .upload-btn {
-            width: 100%;
-            margin-top: 18px;
-            padding: 14px;
-            border: 0;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #008b8b, #006666);
-            color: white;
-            font-family: inherit;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-        }
+    /* ================= PROFILE ================= */
 
-        .upload-btn:disabled {
-            opacity: .5;
-            cursor: not-allowed;
-        }
+    .profile-section {
+      text-align: center;
+      padding: 27px 18px 20px;
+    }
 
-        .progress-box {
-            display: none;
-            margin-top: 18px;
-        }
+    .profile-photo-wrap {
+      width: 112px;
+      height: 112px;
+      margin: auto;
+      position: relative;
+    }
 
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 7px;
-            font-size: 14px;
-        }
+    .profile-photo {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 4px solid #fff;
+      box-shadow:
+        0 5px 18px rgba(0,0,0,.16),
+        0 0 0 2px #004444;
+    }
 
-        .progress {
-            width: 100%;
-            height: 10px;
-            background: #e5eeee;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+    .default-photo {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #004444, #008080);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 43px;
+      border: 4px solid #fff;
+      box-shadow:
+        0 5px 18px rgba(0,0,0,.16),
+        0 0 0 2px #004444;
+    }
 
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: #008b8b;
-            transition: width .2s;
-        }
+    .photo-edit-badge {
+      position: absolute;
+      right: 0;
+      bottom: 3px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #004444;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 3px solid #fff;
+      z-index: 2;
+    }
 
-        .result {
-            display: none;
-            margin-top: 18px;
-            padding: 15px;
-            border-radius: 12px;
-        }
+    .profile-name {
+      margin-top: 15px;
+      font-size: 25px;
+      font-weight: 700;
+      color: #222;
+    }
 
-        .success {
-            background: #e9fff4;
-            border: 1px solid #8ee5b8;
-            color: #126b40;
-        }
+    .username {
+      margin-top: 2px;
+      color: #777;
+      font-size: 15px;
+    }
 
-        .error {
-            background: #fff0f0;
-            border: 1px solid #ffaaaa;
-            color: #a40000;
-        }
+    .bio {
+      max-width: 420px;
+      margin: 9px auto 0;
+      color: #555;
+      line-height: 1.65;
+      font-size: 15px;
+    }
 
-        .copy-btn,
-        .open-btn {
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-            padding: 11px;
-            border: 0;
-            border-radius: 9px;
-            background: #006666;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-family: inherit;
-            cursor: pointer;
-            font-size: 15px;
-        }
+    /* ================= ACTIONS ================= */
 
-        .open-btn {
-            background: #008b8b;
-        }
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 18px;
+    }
 
-        /* =====================================
-           RULES & POLICY
-        ===================================== */
+    .action-btn {
+      min-width: 125px;
+      height: 43px;
+      padding: 0 17px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+    }
 
-        .rules {
-            margin-top: 20px;
-            padding: 16px;
-            background: #f8ffff;
-            border: 1px solid #dceeee;
-            border-radius: 14px;
-        }
+    .action-btn.primary {
+      background: #004444;
+      color: #fff;
+      border-color: #004444;
+    }
 
-        .rules-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #006666;
-            margin-bottom: 10px;
-        }
+    .action-btn:active {
+      transform: scale(.96);
+    }
 
-        .rules ul {
-            padding-left: 20px;
-        }
+    /* ================= STATS ================= */
 
-        .rules li {
-            margin-bottom: 8px;
-            font-size: 13px;
-            line-height: 1.7;
-            color: #555;
-        }
+    .stats {
+      margin: 15px 15px 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid #e9e9e9;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #fff;
+    }
 
-        .rules li:last-child {
-            margin-bottom: 0;
-        }
+    .stat-item {
+      min-height: 84px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #eee;
+      transition: .2s;
+    }
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #888;
-        }
-    </style>
+    .stat-item:last-child {
+      border-right: 0;
+    }
+
+    .stat-item:hover {
+      background: #fafafa;
+    }
+
+    .stat-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .youtube-icon {
+      color: #ff0000;
+    }
+
+    .facebook-icon {
+      color: #1877f2;
+    }
+
+    .rater-icon {
+      color: #004444;
+    }
+
+    .stat-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    .stat-number {
+      margin-top: 2px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    /* ================= PROFILE LINKS ================= */
+
+    .links-section {
+      padding: 20px 15px 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 11px;
+      color: #222;
+    }
+
+    .profile-link {
+      min-height: 61px;
+      border: 1px solid #e9e9e9;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      padding: 9px 13px;
+      margin-bottom: 9px;
+      background: #fff;
+      transition: .2s;
+    }
+
+    .profile-link:active {
+      transform: scale(.98);
+      background: #fafafa;
+    }
+
+    .link-icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      margin-right: 11px;
+    }
+
+    .link-youtube {
+      background: #fff0f0;
+      color: #ff0000;
+    }
+
+    .link-facebook {
+      background: #edf4ff;
+      color: #1877f2;
+    }
+
+    .link-rater {
+      background: #e9f5f5;
+      color: #004444;
+    }
+
+    .link-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .link-subtitle {
+      font-size: 12px;
+      color: #888;
+      margin-top: 1px;
+    }
+
+    .link-arrow {
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* ================= CASINO ICON ================= */
+
+    .casino-icon {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    .casino-logo {
+      width: 90%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ================= MENU ================= */
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 56px;
+      right: 12px;
+      width: 210px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .menu.show {
+      display: block;
+      animation: menuShow .18s ease;
+    }
+
+    @keyframes menuShow {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .menu a {
+      min-height: 47px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #f1f1f1;
+      font-size: 14px;
+    }
+
+    .menu a:last-child {
+      border-bottom: 0;
+    }
+
+    .menu a:hover {
+      background: #f7f7f7;
+    }
+
+    .menu i {
+      width: 20px;
+      color: #004444;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer {
+      text-align: center;
+      padding: 27px 15px 22px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    /* ================= TOAST ================= */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%) translateY(20px);
+      background: #222;
+      color: #fff;
+      padding: 11px 17px;
+      border-radius: 10px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      z-index: 999;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 380px) {
+      .brand {
+        font-size: 18px;
+      }
+
+      .profile-name {
+        font-size: 22px;
+      }
+
+      .stats {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .links-section {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .stat-title {
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="app">
 
-    <header class="header">
-        <h1>Rater Tara Image Upload</h1>
-        <p></p>
-    </header>
+  <!-- HEADER -->
+  <header class="header">
 
-    <main class="content">
+    <div class="brand"></div>
 
-        <div class="card">
+    <div class="header-right">
 
-            <label for="imageFile">
-                ছবি নির্বাচন করুন
-            </label>
+      <!-- Menu -->
+      <button
+        class="header-btn"
+        id="menuButton"
+        type="button"
+        aria-label="Menu"
+      >
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
 
-            <input
-                type="file"
-                id="imageFile"
-                accept="image/jpeg,image/png,image/webp,image/gif"
-            >
+    </div>
 
-            <div class="preview" id="previewBox">
-                <img
-                    id="imagePreview"
-                    alt="Image Preview"
-                >
-            </div>
+  </header>
 
-            <div
-                class="file-info"
-                id="fileInfo"
-            ></div>
+  <!-- THREE DOT MENU -->
+  <div class="menu" id="profileMenu">
 
-            <button
-                class="upload-btn"
-                id="uploadBtn"
-                disabled
-            >
-                ছবি Upload করুন
-            </button>
+    <a href="profile.html">
+      <i class="fa-solid fa-user"></i>
+      <span>প্রোফাইল</span>
+    </a>
 
-            <div
-                class="progress-box"
-                id="progressBox"
-            >
+    <a href="post.html" id="postMenuLink">
+      <i class="fa-solid fa-video"></i>
+      <span>নতুন পোস্ট</span>
+    </a>
 
-                <div class="progress-text">
-                    <span>Uploading...</span>
-                    <span id="progressText">0%</span>
-                </div>
+    <a href="messages.html">
+      <i class="fa-solid fa-message"></i>
+      <span>মেসেজ</span>
+    </a>
 
-                <div class="progress">
-                    <div
-                        class="progress-bar"
-                        id="progressBar"
-                    ></div>
-                </div>
+    <a href="settings.html">
+      <i class="fa-solid fa-gear"></i>
+      <span>সেটিংস</span>
+    </a>
 
-            </div>
+  </div>
+
+  <!-- PROFILE -->
+  <section class="profile-section">
+
+    <div class="profile-photo-wra">
 
 
-            <!-- SUCCESS -->
+      <!-- DEFAULT IMAGE -->
+      <div
+        id="defaultPhoto"
+        class="default-photo"
+        style="display: none;"
+      >
+        <i class="fa-solid fa-user"></i>
+      </div>
 
-            <div
-                class="result success"
-                id="successBox"
-            >
+      <!-- EDIT BADGE -->
+      <a
+        href="edit-profile.html"
+        class="photo-edit-badge"
+        title="প্রোফাইল এডিট করুন"
+      >
+        <i class="fa-solid fa-camera"></i>
+      </a>
 
-                <strong>
-                    ✓ ছবি সফলভাবে Upload হয়েছে
-                </strong>
+    </div>
 
-                <!-- URL এখানে আর দেখানো হবে না -->
+    <h1 class="profile-name" id="profileName">
+      ইন্টারন্যাশনাল জন প্রিয় ক্যাসিনো প্ল্যাটফর্ম
+    </h1>
 
-                <button
-                    class="copy-btn"
-                    onclick="copyUrl()"
-                >
-                    Image URL Copy করুন
-                </button>
+    <div class="username" id="username">
+      @casino
+    </div>
 
-                <a
-                    id="openImage"
-                    class="open-btn"
-                    href="#"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    ছবি দেখুন
-                </a>
+    <p class="bio" id="bio">
+      🌟 একটি আধুনিক ও আকর্ষণীয় অনলাইন প্ল্যাটফর্ম!
+এই প্ল্যাটফর্মে রয়েছে আধুনিক ডিজাইন, সহজ নেভিগেশন এবং মোবাইল-ফ্রেন্ডলি ইন্টারফেস। ব্যবহারকারীদের সুবিধার কথা মাথায় রেখে সাজানো হয়েছে প্রতিটি বিভাগ।
+    </p>
 
-            </div>
+    <!-- ACTION BUTTONS -->
+    <div class="actions"></div>
 
+  </section>
 
-            <!-- ERROR -->
+  <!-- ================= STATS ================= -->
 
-            <div
-                class="result error"
-                id="errorBox"
-            ></div>
+  <section class="stats">
 
+    <!-- TELEGRAM -->
+ 
 
-            <!-- RULES -->
+  </section>
 
-            <div class="rules">
+  <!-- ================= LINK OPTIONS ================= -->
 
-                <div class="rules-title">
-                    📋 নিয়ম ও নীতিমালা
-                </div>
+  <section class="links-section">
 
-                <ul>
+    <h2 class="section-title">
+   ক্যাসিনো   তালিকা
+    </h2>
 
-                    <li>
-                        শুধুমাত্র বৈধ এবং নিজের ব্যবহারের
-                        ছবি Upload করুন।
-                    </li>
+   
+  <!-- CASINO PLATFORM -->
+    <a
+      href="https://mcw85229381aff.com/af/z9zVqoC1/join"
+      class="profile-link"
+    >
 
-                    <li>
-                        অন্য ব্যক্তির অনুমতি ছাড়া
-                        ব্যক্তিগত ছবি Upload করবেন না।
-                    </li>
+      <div class="link-icon link-rater casino-icon">
+        <img
+          src="https://res.cloudinary.com/rawaad4u/image/upload/v1792362877/20261019_043417.png"
+          alt="Casino Platform"
+          class="casino-logo"
+        >
+      </div>
 
-                    <li>
-                        অশ্লীল, অবৈধ, সহিংস বা
-                        আইনবিরোধী কোনো ছবি Upload করা যাবে না।
-                    </li>
-
-                    <li>
-                        কপিরাইটযুক্ত ছবি ব্যবহারের ক্ষেত্রে
-                        প্রয়োজনীয় অনুমতি থাকা আবশ্যক।
-                    </li>
-
-                    <li>
-                        অন্যের পরিচয় ব্যবহার করে
-                        বিভ্রান্তিকর ছবি Upload করা নিষিদ্ধ।
-                    </li>
-
-                    <li>
-                        Upload করা ছবির দায়ভার
-                        সম্পূর্ণভাবে Uploadকারী ব্যক্তির।
-                    </li>
-
-                    <li>
-                        নিয়ম ভঙ্গকারী ছবি কর্তৃপক্ষের
-                        অনুমোদন ছাড়াই সরিয়ে দেওয়া হতে পারে।
-                    </li>
-
-                    <li>
-                        প্রয়োজন অনুযায়ী কর্তৃপক্ষ Upload করা
-                        ছবি পর্যালোচনা বা মুছে দিতে পারে।
-                    </li>
-
-                </ul>
-
-            </div>
-
+      <div class="link-content">
+        <div class="link-title">
+          MCW MEGA CASINO
         </div>
 
-    </main>
+        <div class="link-subtitle">
+          Casino Games &amp; Entertainment
+        </div>
+      </div>
 
-    <footer class="footer">
+      <i class="fa-solid fa-chevron-right link-arrow"></i>
 
-    </footer>
+    </a>
+   
+
+   
+    <!-- CASINO PLATFORM -->
+    <a
+      href="https://freeflexiload.vercel.app/"
+      class="profile-link"
+    >
+
+      <div class="link-icon link-rater casino-icon">
+        <img
+          src="https://res.cloudinary.com/rawaad4u/image/upload/v1792088077/images_1.jpg"
+          alt="Casino Platform"
+          class="casino-logo"
+        >
+      </div>
+
+      <div class="link-content">
+        <div class="link-title">
+          TK999
+        </div>
+
+        <div class="link-subtitle">
+          Casino Games &amp; Entertainment
+        </div>
+      </div>
+
+      <i class="fa-solid fa-chevron-right link-arrow"></i>
+
+    </a>
+  <!-- CASINO PLATFORM -->
+    <a
+      href="http://www.go444.best/?r=eda2209"
+      class="profile-link"
+    >
+
+      <div class="link-icon link-rater casino-icon">
+        <img
+          src="https://res.cloudinary.com/rawaad4u/image/upload/v1792363471/20261019_044412.png"
+          alt="Casino Platform"
+          class="casino-logo"
+        >
+      </div>
+
+      <div class="link-content">
+        <div class="link-title">
+          GO444
+        </div>
+
+        <div class="link-subtitle">
+          Casino Games &amp; Entertainment
+        </div>
+      </div>
+
+      <i class="fa-solid fa-chevron-right link-arrow"></i>
+
+    </a>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2026 Casino Games  • All Rights Reserved
+  </footer>
 
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-
-/* =========================================
-   CLOUDINARY CONFIG
-========================================= */
-
-const CLOUDINARY_CLOUD_NAME = "rawaad4u";
-
-/*
-   Cloudinary Dashboard-এ তৈরি করা
-   Unsigned Image Upload Preset
-*/
-const CLOUDINARY_UPLOAD_PRESET =
-    "rater_tara_image";
-
-
-/*
-   IMAGE UPLOAD URL
-*/
-const CLOUDINARY_UPLOAD_URL =
-    "https://api.cloudinary.com/v1_1/" +
-    CLOUDINARY_CLOUD_NAME +
-    "/image/upload";
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const imageFile =
-    document.getElementById("imageFile");
-
-const uploadBtn =
-    document.getElementById("uploadBtn");
-
-const previewBox =
-    document.getElementById("previewBox");
-
-const imagePreview =
-    document.getElementById("imagePreview");
-
-const fileInfo =
-    document.getElementById("fileInfo");
-
-const progressBox =
-    document.getElementById("progressBox");
-
-const progressBar =
-    document.getElementById("progressBar");
-
-const progressText =
-    document.getElementById("progressText");
-
-const successBox =
-    document.getElementById("successBox");
-
-const errorBox =
-    document.getElementById("errorBox");
-
-const openImage =
-    document.getElementById("openImage");
-
-
-let selectedFile = null;
-let uploadedUrl = "";
-
-
-/* =========================================
-   IMAGE SELECT
-========================================= */
-
-imageFile.addEventListener(
-    "change",
-    function () {
-
-        selectedFile = this.files[0];
-
-        successBox.style.display = "none";
-        errorBox.style.display = "none";
-
-
-        if (!selectedFile) {
-
-            uploadBtn.disabled = true;
-
-            previewBox.style.display =
-                "none";
-
-            fileInfo.style.display =
-                "none";
-
-            return;
-        }
-
-
-        /* IMAGE CHECK */
-
-        if (
-            !selectedFile.type.startsWith(
-                "image/"
-            )
-        ) {
-
-            showError(
-                "অনুগ্রহ করে একটি ছবি নির্বাচন করুন।"
-            );
-
-            this.value = "";
-
-            uploadBtn.disabled = true;
-
-            return;
-        }
-
-
-        /* FILE SIZE */
-
-        const sizeMB =
-            selectedFile.size /
-            (1024 * 1024);
-
-
-        /* PREVIEW */
-
-        const objectURL =
-            URL.createObjectURL(
-                selectedFile
-            );
-
-        imagePreview.src =
-            objectURL;
-
-        previewBox.style.display =
-            "block";
-
-
-        /* FILE INFORMATION */
-
-        fileInfo.innerHTML =
-            "<b>ফাইল:</b> " +
-            escapeHtml(
-                selectedFile.name
-            ) +
-            "<br>" +
-            "<b>Size:</b> " +
-            sizeMB.toFixed(2) +
-            " MB";
-
-        fileInfo.style.display =
-            "block";
-
-
-        uploadBtn.disabled =
-            false;
-
-    }
-);
-
-
-/* =========================================
-   UPLOAD BUTTON
-========================================= */
-
-uploadBtn.addEventListener(
-    "click",
-    function () {
-
-        if (!selectedFile) {
-
-            showError(
-                "প্রথমে একটি ছবি নির্বাচন করুন।"
-            );
-
-            return;
-        }
-
-        uploadToCloudinary();
-
-    }
-);
-
-
-/* =========================================
-   CLOUDINARY IMAGE UPLOAD
-========================================= */
-
-function uploadToCloudinary() {
-
-    uploadBtn.disabled = true;
-
-    successBox.style.display =
-        "none";
-
-    errorBox.style.display =
-        "none";
-
-    progressBox.style.display =
-        "block";
-
-    progressBar.style.width =
-        "0%";
-
-    progressText.textContent =
-        "0%";
-
-
-    const formData =
-        new FormData();
-
-
-    formData.append(
-        "file",
-        selectedFile
-    );
-
-
-    formData.append(
-        "upload_preset",
-        CLOUDINARY_UPLOAD_PRESET
-    );
-
-
-    const xhr =
-        new XMLHttpRequest();
-
-
-    xhr.open(
-        "POST",
-        CLOUDINARY_UPLOAD_URL,
-        true
-    );
-
-
-    /* =====================================
-       UPLOAD PROGRESS
-    ===================================== */
-
-    xhr.upload.addEventListener(
-        "progress",
-        function (event) {
-
-            if (
-                event.lengthComputable
-            ) {
-
-                const percent =
-                    Math.round(
-                        (
-                            event.loaded /
-                            event.total
-                        ) * 100
-                    );
-
-                progressBar.style.width =
-                    percent + "%";
-
-                progressText.textContent =
-                    percent + "%";
-
-            }
-
-        }
-    );
-
-
-    /* =====================================
-       RESPONSE
-    ===================================== */
-
-    xhr.onreadystatechange =
-        function () {
-
-            if (
-                xhr.readyState !== 4
-            ) {
-                return;
-            }
-
-
-            uploadBtn.disabled =
-                false;
-
-
-            let data;
-
-
-            try {
-
-                data =
-                    JSON.parse(
-                        xhr.responseText
-                    );
-
-            } catch (error) {
-
-                showError(
-                    "Cloudinary থেকে সঠিক response পাওয়া যায়নি।"
-                );
-
-                return;
-            }
-
-
-            /* SUCCESS */
-
-            if (
-                xhr.status >= 200 &&
-                xhr.status < 300
-            ) {
-
-                uploadedUrl =
-                    data.secure_url ||
-                    "";
-
-
-                if (!uploadedUrl) {
-
-                    showError(
-                        "Upload হয়েছে, কিন্তু Image URL পাওয়া যায়নি।"
-                    );
-
-                    return;
-                }
-
-
-                progressBar.style.width =
-                    "100%";
-
-                progressText.textContent =
-                    "100%";
-
-
-                /*
-                   URL screen-এ দেখানো হবে না।
-                   শুধু JavaScript variable-এ থাকবে।
-                */
-
-
-                openImage.href =
-                    uploadedUrl;
-
-
-                successBox.style.display =
-                    "block";
-
-
-                console.log(
-                    "Cloudinary Image URL:",
-                    uploadedUrl
-                );
-
-
-            } else {
-
-                const message =
-                    data?.error?.message ||
-                    "Cloudinary image upload failed.";
-
-                showError(
-                    message
-                );
-
-            }
-
-        };
-
-
-    /* =====================================
-       NETWORK ERROR
-    ===================================== */
-
-    xhr.onerror =
-        function () {
-
-            uploadBtn.disabled =
-                false;
-
-            showError(
-                "Internet connection অথবা Cloudinary connection সমস্যা হয়েছে।"
-            );
-
-        };
-
-
-    /* =====================================
-       TIMEOUT
-    ===================================== */
-
-    xhr.ontimeout =
-        function () {
-
-            uploadBtn.disabled =
-                false;
-
-            showError(
-                "Upload timeout হয়েছে। আবার চেষ্টা করুন।"
-            );
-
-        };
-
-
-    xhr.timeout =
-        10 * 60 * 1000;
-
-
-    xhr.send(
-        formData
-    );
-
-}
-
-
-/* =========================================
-   COPY URL
-========================================= */
-
-async function copyUrl() {
-
-    if (!uploadedUrl) {
-
-        alert(
-            "কপি করার জন্য কোনো Image URL নেই।"
-        );
-
-        return;
-    }
-
-
+  /* =====================================================
+     RATER TARA PROFILE
+     NO FIREBASE
+     PROFILE DATA COMES FROM edit-profile.html
+  ===================================================== */
+
+  const PROFILE_STORAGE_KEY = "raterTaraProfile";
+
+  /* DEFAULT PROFILE */
+  const defaultProfile = {
+    name: "Rater Tara",
+    username: "@rater_tara",
+    bio: "একটা সুন্দর গল্পের অপেক্ষায়… তুমি হবে গল্পের সবচেয়ে সুন্দর অধ্যায়…",
+    photoURL: ""
+  };
+
+  /* ================= LOAD PROFILE ================= */
+
+  function getProfile() {
     try {
+      const saved = localStorage.getItem(PROFILE_STORAGE_KEY);
 
-        await navigator.clipboard.writeText(
-            uploadedUrl
-        );
+      if (!saved) {
+        return defaultProfile;
+      }
 
-        alert(
-            "Image URL Copy হয়েছে।"
-        );
+      const data = JSON.parse(saved);
+
+      return {
+        ...defaultProfile,
+        ...data
+      };
 
     } catch (error) {
-
-        /*
-           Clipboard API কাজ না করলে
-           fallback copy
-        */
-
-        const textarea =
-            document.createElement(
-                "textarea"
-            );
-
-        textarea.value =
-            uploadedUrl;
-
-        textarea.style.position =
-            "fixed";
-
-        textarea.style.opacity =
-            "0";
-
-        document.body.appendChild(
-            textarea
-        );
-
-        textarea.focus();
-
-        textarea.select();
-
-        document.execCommand(
-            "copy"
-        );
-
-        textarea.remove();
-
-
-        alert(
-            "Image URL Copy হয়েছে।"
-        );
-
+      console.error("Profile loading error:", error);
+      return defaultProfile;
     }
+  }
 
-}
+  /* ================= DISPLAY PROFILE ================= */
 
+  function loadProfile() {
+    const profile = getProfile();
 
-/* =========================================
-   ERROR
-========================================= */
+    const name = document.getElementById("profileName");
+    const username = document.getElementById("username");
+    const bio = document.getElementById("bio");
+    const image = document.getElementById("profileImage");
+    const defaultPhoto = document.getElementById("defaultPhoto");
 
-function showError(message) {
+    /* NAME */
+    name.textContent =
+      profile.name || defaultProfile.name;
 
-    errorBox.textContent =
-        "✕ " + message;
+    /* USERNAME */
+    username.textContent =
+      profile.username || defaultProfile.username;
 
-    errorBox.style.display =
-        "block";
+    /* BIO */
+    bio.textContent =
+      profile.bio || defaultProfile.bio;
 
-}
+    /* PROFILE PHOTO */
+    if (profile.photoURL && isValidImageURL(profile.photoURL)) {
+      image.style.display = "block";
+      defaultPhoto.style.display = "none";
 
+      if (image.src !== profile.photoURL) {
+        image.src = profile.photoURL;
+      }
+    } else {
+      image.style.display = "block";
+      defaultPhoto.style.display = "none";
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
+      image.src =
+        "https://res.cloudinary.com/rawaad4u/image/upload/v1792095571/FB_IMG_1792095556921.jpg";
+    }
+  }
 
-function escapeHtml(text) {
+  /* ================= IMAGE URL CHECK ================= */
 
-    return String(text)
+  function isValidImageURL(url) {
+    try {
+      const parsed = new URL(url);
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+      return (
+        parsed.protocol === "http:" ||
+        parsed.protocol === "https:"
+      );
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+    } catch {
+      return false;
+    }
+  }
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+  /* ================= MENU ================= */
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+  const menuButton =
+    document.getElementById("menuButton");
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+  const profileMenu =
+    document.getElementById("profileMenu");
 
-}
+  menuButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    profileMenu.classList.toggle("show");
+  });
 
+  document.addEventListener("click", function(event) {
+    if (
+      !profileMenu.contains(event.target) &&
+      !menuButton.contains(event.target)
+    ) {
+      profileMenu.classList.remove("show");
+    }
+  });
+
+  /* ================= IMAGE ERROR ================= */
+
+  document
+    .getElementById("profileImage")
+    .addEventListener("error", function() {
+      this.style.display = "none";
+
+      document.getElementById("defaultPhoto").style.display = "flex";
+
+      showToast("প্রোফাইল ছবি লোড করা যায়নি");
+    });
+
+  /* ================= TOAST ================= */
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(function() {
+      toast.classList.remove("show");
+    }, 2500);
+  }
+
+  /* ================= START ================= */
+
+  loadProfile();
+
+  /*
+    অন্য tab/page থেকে edit-profile.html
+    দিয়ে profile পরিবর্তন করলে নতুন data দেখাবে।
+  */
+
+  window.addEventListener("storage", function(event) {
+    if (event.key === PROFILE_STORAGE_KEY) {
+      loadProfile();
+    }
+  });
+
+  document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === "visible") {
+      loadProfile();
+    }
+  });
 </script>
 
 </body>
